@@ -1,0 +1,29 @@
+{% extends "blogs/_base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <a href="{% url 'post_write' %}" class="btn btn-primary float-right">글쓰기</a>
+    </div>
+    {% for post in posts %}
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="post-preview">
+        <a href="{% url 'post_detail' post.id %}">
+          <h2 class="post-title">
+            {{ post.title }}
+          </h2>
+          <h3 class="post-subtitle">
+            <!-- 지정된 문자 수보다 긴 문자열 잘라내기 잘린 문자열은 ("...") 끝난다!  -->
+            {{ post.content|truncatechars:5 }}
+          </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">{{ post.user }}</a>
+            {{ post.created_at }}</p>
+        </div>
+      </div>
+      {% endfor %}
+  <hr>
+  </div>
+{% endblock %}

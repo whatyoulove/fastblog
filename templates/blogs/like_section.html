@@ -1,0 +1,14 @@
+<!-- 좋아요 수 -->
+{{ total_likes }}
+
+<!-- 로그인 했을 경우 좋아요 누를 수 있음 -->
+{% if user.is_authenticated %} 
+<form action="{% url 'post_like' %}" method="POST">
+  {% csrf_token %}
+  {% if is_liked %}
+    <button type="submit" class="btn btn-primary" id="like" name="post_id" value="{{ post.id }}">좋아요 취소</button>
+  {% else %}
+    <button type="submit" class="btn btn-primary"  id="like" name="post_id" value="{{ post.id }}">좋아요</button>
+  {% endif %}
+</form>
+{% endif %}
